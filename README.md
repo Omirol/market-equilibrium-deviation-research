@@ -1,61 +1,57 @@
-# Market Equilibrium & Statistical Deviation in Crypto Microstructure
+# Market Equilibrium Deviation Research (Project Y)
 
-**Repository Type:** Research Archive / Empirical Study  
-**Status:** Paused for Analysis & Calibration  
-**License:** All Rights Reserved  
+![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
+![Numba](https://img.shields.io/badge/Numba-JIT%20Optimized-orange.svg)
+![Deep Learning](https://img.shields.io/badge/Deep%20Learning-Keras%20%7C%20Transformers-red.svg)
+![Binance](https://img.shields.io/badge/Exchange-Binance%20Futures-yellow.svg)
 
----
+## 📌 Overview
+**Project Y** is an advanced quantitative research and algorithmic trading framework focused on discovering and exploiting market microstructure anomalies in high-frequency data streams (Binance USDⓈ-M Futures). 
 
-## 1. Abstract
-This repository documents an engineering investigation into the hypothesis of **Global Market Equilibrium** applied to cryptocurrency perpetual futures. The primary objective was to determine if high-volatility assets (BTC, ETH, SOL) exhibit exploitable statistical deviations ("Managed Imbalance") within a predominantly efficient, maximum-entropy market structure.
+This repository documents the transition from theoretical statistical edge formulation ("Step Level" anomaly detection) to a robust, low-latency execution engine. The core philosophy treats the market order book not just as a financial ledger, but as a physical environment influenced by pressure, gravity, and velocity.
 
-This project is **not** a commercial trading bot product. It is a documented attempt to structure market chaos using Event-Driven architecture, outlining both the methodological successes and the limitations of Machine Learning in this domain.
+## 🔬 Core Research Concepts
 
-## 2. The Core Thesis
-> **Hypothesis:** While crypto markets converge to a 50/50 directional probability over macro horizons, volatility clustering creates temporary, path-dependent "Regimes" where entropy decreases.
+### 1. Step Level Anomalies & "Streaks"
+Extensive backtesting and statistical analysis were conducted to evaluate the parity between trend continuation and reversal across micro-structural steps.
+- **Hypothesis:** Specific "Step Levels" provide a measurable, long-term statistical edge.
+- **Findings:** Traditional Machine Learning models (e.g., Random Forest) fail to consistently outperform random chance in this specific microstructure environment. This necessitated the development of proprietary sequence modeling and custom anomaly detection techniques.
 
-**Key Findings:**
-* **Equilibrium Dominance:** Standard time-based series demonstrate efficient balancing mechanisms. Directional probability reverts to the mean (~50%) across large sample sizes.
-* **ML Failure:** Traditional models (LSTM, Transformers, Random Forest) trained on time-series data failed to consistently outperform random chance, suffering from noise overfitting.
-* **The "Event" Pivot:** Transitioning from *Time-Based* to *Volatility-Based* (Step Level) representation revealed statistically significant deviations.
+### 2. Live Physics Engine for Market Microstructure
+Instead of relying solely on traditional technical indicators, the execution engine models the order book using physical concepts:
+- **Gravity & Pressure:** Calculating the magnetic pull of large limit orders.
+- **Velocity & Walls:** Measuring the speed of tape execution against resistance walls to predict micro-breakouts.
 
-## 3. Methodology
-The research moved away from time-based candles to an **Event-Driven Architecture**:
+### 3. Market Data Tokenization & Transformers
+Adapting NLP concepts for financial time-series:
+- Raw tick data is categorized into discrete `speed_bins`, `vol_bins`, and `zone_bins`.
+- This "Market Vocabulary" is fed into custom **Transformer** and **LSTM** architectures to process order-flow context the same way an LLM processes natural language.
+- Implementation of **Focal Loss** to mitigate extreme class imbalances inherent in market movements.
 
-1.  **Adaptive Step Levels:** Discarding time to focus solely on price vector changes relative to volatility (ATR-based dynamic grids).
-2.  **Behavioral Classification:** Categorizing market states not just by price direction, but by structural integrity (Continuation vs. Reversal).
-3.  **Rolling Window Entropy:** Measuring the probability drift within specific event windows to identify "Fat Tail" events.
+## ⚙️ System Architecture & Engineering
 
-## 4. Empirical Results (Backtest Sample)
-*Data Period: Volatility Clusters 2024-2025* *Method: Event-Driven Step Logic (No ML)*
+The execution framework is built for resilience, speed, and autonomy under extreme market volatility.
 
-| Asset | Events Sample | Win Rate | Net Edge (w/o fees) |
-|-------|---------------|----------|---------------------|
-| **BTCUSDT** | 654 | **58.9%** | **17.7%** |
-| **ETHUSDT** | 643 | **56.6%** | **13.2%** |
-| **SOLUSDT** | 1,285 | **56.0%** | **12.1%** |
-| **DOTUSDT** | 773 | 56.0% | 12.0% |
-| **AVAXUSDT**| 1104 | 53.2% | 6.3% |
+* **Low-Latency Execution:** Critical path trading logic is optimized using `Numba (@jit)` to achieve near C-level execution speeds in Python.
+* **Asynchronous Data Pipeline:** Robust WebSocket connection management handling real-time tick data, featuring automatic fallback mechanisms and drop-recovery protocols.
+* **Distributed Orchestration (Telegram Manager):** A custom backend manager utilizing `asyncio` and the Telegram API for remote server monitoring, multi-bot orchestration, and process memory management (`psutil`).
+* **Multi-Layer Risk Management:** "Paranoid Sync" concepts ensuring local bot states strictly match exchange server states, preventing ghost positions and executing emergency SL/TP dynamically.
 
-*Note: Results are sensitive to execution latency and micro-liquidity (wick) variance.*
+## 📊 Current Status & Motivation
 
-## 5. Technical Architecture
-The provided code (`new_logic_2.py`) represents the execution engine built to test these theories in a live environment:
-* **Orchestrator:** Python 3.11 `asyncio` core for zero-latency WebSocket processing.
-* **Risk Protocol:** Hard-coded 3-Tier Circuit Breaker (Drawdown protection).
-* **Infrastructure:** AWS deployment with Telegram-based telemetry.
+This project is currently paused for strategic reassessment and community feedback. 
 
-## 6. Current Limitations & Open Questions
-Despite the identified edge, the system faces challenges that halted commercial scaling:
-1.  **Liquidity Friction:** Theoretical step-levels often suffer from execution slippage during high-volatility impulses.
-2.  **Regime Shifts:** The optimal window size is not static. We are investigating methods for **Dynamic Window Governance** without falling into the trap of curve-fitting.
-3.  **Fee Drag:** The edge narrows significantly when factoring in standard exchange fee tiers for high-frequency rotation.
+**Author's Note:** The R&D and engineering of this system have been conducted under extreme geopolitical conditions in Ukraine. The necessity to build fully autonomous, fault-tolerant systems is not just a theoretical preference, but a practical requirement dictated by reality (including infrastructure disruptions and ballistic threats). 
 
-## 7. Contact & Feedback
-This research was conducted in Chernihiv, Ukraine, under constraints that prioritized robust, autonomous engineering.
+The primary motivation behind releasing this documentation is to preserve the R&D results and seek critical, professional feedback from the quantitative finance and algorithmic trading community. 
 
-I am releasing this archive to seek **rigorous critique** from the quantitative finance community regarding:
-* Methodologies for regime classification without look-ahead bias.
-* Statistical validity of the identified "Fat Tails".
+## 🛠 Tech Stack
+- **Core:** Python, Numba, AsyncIO, Pandas, Numpy.
+- **ML/AI:** Keras, TensorFlow (Transformers, LSTM), LightGBM, CatBoost, Scikit-learn, Optuna.
+- **Infrastructure:** Binance UM-Futures API (REST & WebSockets), python-telegram-bot, psutil.
 
-**Docs:** See [Project_Y_Research_Report.pdf](Project_Y_Research_Report.pdf) for full charts and data.
+## 🤝 Let's Connect
+Constructive critique, technical advice, or strategic guidance are highly appreciated. 
+
+**Denys Ivanok** Quant Researcher & System Architect | ex-CFO  
+[LinkedIn Profile](https://www.linkedin.com/in/denysivanok/)
